@@ -28,7 +28,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     private final UserMapper mapper;
     private final UserRepository userRepository;
@@ -39,9 +39,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public List<CreateUserResponseModel> getUsers() {
         log.debug("Retrieving all the users");
         List<CreateUserResponseModel> users = new ArrayList<>();
-        userRepository.findAll().forEach(user -> {
-            users.add(mapper.userToResponseUser(user));
-        });
+        userRepository.findAll().forEach(user -> users.add(mapper.userToResponseUser(user)));
         return users;
     }
 
